@@ -4,12 +4,22 @@ public class App {
 
 	public static void main(String[] args) {
 		Pouch pouch = new Pouch();
-		pouch.storeItem(new Weapon());
-		pouch.storeItem(new Weapon());
-		pouch.storeItem(new Weapon());
-		pouch.storeItem(new Potion());
+		Potion potion = new Potion();
+		potion.setType("health");
+		potion.setVolume(10);
 		
-		pouch.useItem(new Potion());
+		Weapon weapon = new Weapon();
+
+		pouch.storeItem(potion);
+		pouch.storeItem(weapon);
+		pouch.storeItem(weapon);
+		pouch.storeItem(weapon);
+		pouch.storeItem(weapon);
+		pouch.storeItem(weapon);
+
+		System.out.println(pouch.getItems().size());
+		pouch.useItem(potion);
+		System.out.println(pouch.getItems().size());
 
 	}
 

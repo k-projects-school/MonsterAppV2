@@ -7,7 +7,9 @@ public class Entity {
 				maxHp, 
 				lvl = 1, 
 				exp = 0, 
-				expNeededToLvlUp;
+				expNeededToLvlUp,
+				mp,
+				maxMp;
 	
 	private double power;
 	
@@ -113,6 +115,34 @@ public class Entity {
 	}
 
 	/**
+	 * @return the mp
+	 */
+	public int getMp() {
+		return mp;
+	}
+
+	/**
+	 * @param mp the mp to set
+	 */
+	public void setMp(int mp) {
+		this.mp = mp;
+	}
+
+	/**
+	 * @return the maxMp
+	 */
+	public int getMaxMp() {
+		return maxMp;
+	}
+
+	/**
+	 * @param maxMp the maxMp to set
+	 */
+	public void setMaxMp(int maxMp) {
+		this.maxMp = maxMp;
+	}
+
+	/**
 	 * @return the power
 	 */
 	public double getPower() {
@@ -124,5 +154,21 @@ public class Entity {
 	 */
 	public void setPower() {
 		
+	}
+
+	public void heal(int hp) {
+		if (this.hp + hp > this.maxHp) {
+			this.setHp(this.maxHp);
+		} else {
+			this.hp += hp;
+		}
+	}
+
+	public void restoreMp(int mp) {
+		if (this.mp + mp > this.maxHp) {
+			this.setMp(this.maxMp);
+		} else {
+			this.mp += mp;
+		}
 	}
 }

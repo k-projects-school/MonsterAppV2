@@ -3,39 +3,72 @@ package be.my_portfolio.monster_app;
 import java.util.*;
 
 public class Pouch {
-	private HashMap<Integer, Object> items = new HashMap<Integer, Object>();
-	
-	public void storeItem(Object item) {
-		this.items.put(this.items.size(), item);
+	private HashMap<Integer, Pouchable> items = new HashMap<Integer, Pouchable>();
+	private int slots = 5, slotsTaken = 0;
+
+	public HashMap<Integer, Pouchable> getItems(){
+		return this.items;
 	}
 	
-	public Object useItem(Object item) {
-		Iterator<Map.Entry<Integer, Object>> iterator = this.items.entrySet().iterator();
+	/**
+	 * @return the slots
+	 */
+	public int getSlots() {
+		return slots;
+	}
+
+	/**
+	 * @param slots the slots to set
+	 */
+	public void setSlots(int slots) {
+		this.slots = slots;
+	}
+
+	/**
+	 * @return the slotsTaken
+	 */
+	public int getSlotsTaken() {
+		return slotsTaken;
+	}
+
+	/**
+	 * @param slotsTaken the slotsTaken to set
+	 */
+	public void setSlotsTaken(int slotsTaken) {
+		this.slotsTaken = slotsTaken;
+	}
+
+	public void storeItem(Pouchable item) {
+		this.items.put(this.items.size(), item);
+	}
+
+	public Object useItem(Pouchable item) {
+		Iterator<Map.Entry<Integer, Pouchable>> iterator = this.items.entrySet().iterator();
 		while (iterator.hasNext()) {
-			Map.Entry<Integer, Object> entry = iterator.next();
-			Object value = entry.getValue();
-			
-			if (value instanceof Potion) {
-				this.usePotion(item);
-			}
-			
-			else if (value instanceof Weapon) {
-				this.removeWeapon(item);
-			}
-			
-			else {
-				System.out.println("oeps");
+			Map.Entry<Integer, Pouchable> entry = iterator.next();
+
+			if (item.equals(entry.getValue())) {
+				if (entry.getValue() instanceof Potion) {
+					Potion potion = (Potion) item;
+					potion.use();
+					iterator.remove();
+				}
+
+				if (entry.getValue() instanceof Weapon) {
+					Weapon weapon = (Weapon) item;
+					this.useWeapon(weapon);
+				}
 			}
 		}
-		
+
 		return true;
 	}
 
-	private void removeWeapon(Object item) {
+	private void useWeapon(Weapon item) {
 		System.out.println("weapon");
 	}
 
-	private void usePotion(Object item) {
+	private void usePotion(Potion item) {
 		System.out.println("potion");
 	}
 }

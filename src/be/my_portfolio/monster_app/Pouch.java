@@ -56,19 +56,11 @@ public class Pouch {
 
 				if (entry.getValue() instanceof Weapon) {
 					Weapon weapon = (Weapon) item;
-					this.useWeapon(weapon);
+					weapon.use();
 				}
 			}
 		}
 
 		return true;
-	}
-
-	private void useWeapon(Weapon item) {
-		System.out.println("weapon");
-	}
-
-	private void usePotion(Potion item) {
-		System.out.println("potion");
 	}
 }
